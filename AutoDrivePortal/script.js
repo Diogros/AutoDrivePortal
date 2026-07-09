@@ -78,6 +78,8 @@ async function efetuarLogin() {
     }
 }
 
+window.efetuarLogin = efetuarLogin;
+
 function efetuarLogout() {
     USUARIO_LOGADO = null;
     localStorage.removeItem('usuarioLogado');
