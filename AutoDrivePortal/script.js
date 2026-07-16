@@ -178,7 +178,7 @@ function renderizarGerenciadorFrota() {
             acaoBotao = `<span style="color: #777; font-size: 13px; font-style: italic;">Carro em trânsito</span>`;
         }
 
-        const botaoExcluir = `<button class="btn-table" style="background-color: #2c3e50; margin-left: 5px;" onclick="deletarCarro(${carro.id})">🗑️ Excluir</button>`;
+        const botaoExcluir = `<button class="btn-table" style="background-color: #2c3e50; margin-left: 5px;" onclick="deletarCarro(${carro.id}, '${carro.status}')">🗑️ Excluir</button>`;
 
         tr.innerHTML = `
             <td><b>${carro.marca} ${carro.modelo}</b> <br><small style="color:#777;">Ano: ${carro.ano}</small></td>
@@ -497,7 +497,12 @@ async function cadastrarCarroAdmin() {
     }
 }
 
-async function deletarCarro(idCarro) {
+async function deletarCarro(idCarro, statusCarro) {
+    if (statusCarro === 'Alugado' || statusCarro === 'Indisponivel') {
+        alert("Operação bloqueada: Este veículo está alugado e não pode ser excluído do sistema.");
+        return; 
+    }
+
     const confirmacao = confirm("Tem certeza que deseja excluir permanentemente este veículo?");
     if (!confirmacao) return; 
 
@@ -518,6 +523,8 @@ async function deletarCarro(idCarro) {
         alert("Falha na comunicação com o servidor.");
     }
 }
+
+window.deletarCarro = deletarCarro;
 
 function verificarSessaoSalva() {
     const sessaoSalva = localStorage.getItem('usuarioLogado');
