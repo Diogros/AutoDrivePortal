@@ -237,9 +237,10 @@ function abrirFormularioReserva(id, nomeCarro, precoDiaria) {
 
 async function salvarNovaReserva() {
     const veiculoId = document.getElementById('reservaCarroId').value;
-    const dataInicio = document.getElementById('dataRetirada').value;
+    const precoDiaria = parseFloat(document.getElementById('reservaPrecoDiaria').value);
+    
+    const dataInicio = document.getElementById('dataRetirada').value; 
     const dataFim = document.getElementById('dataDevolucao').value;
-    const precoDiaria = parseFloat(document.getElementById('reservaPrecoDiaria').value || 0);
 
     if (!dataInicio || !dataFim) {
         alert("⚠️ Por favor, selecione as datas de retirada e devolução.");
@@ -258,23 +259,20 @@ async function salvarNovaReserva() {
     }
 
     if (dataVolta < dataIda) {
-        alert("⚠️ A data de devolução não pode ser anterior à data de retirada!");
+        alert("⚠️ A data de devolução não pode ser antes da retirada!");
         return;
     }
 
     const diferencaTempo = Math.abs(dataVolta - dataIda);
-    const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24)) || 1; 
+    const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24)) || 1;
     const valorTotal = diferencaDias * precoDiaria;
 
-    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-    const usuarioId = usuarioLogado ? usuarioLogado.id : 1; 
-
     const dadosReserva = {
-        usuario_id: usuarioId,
         veiculo_id: parseInt(veiculoId),
-        data_inicio: dataInicio,
+        data_inicio: dataInicio, 
         data_fim: dataFim,
-        valor_total: valorTotal
+        valor_total: valorTotal,
+        status: "Pendente"
     };
 
     try {
@@ -284,24 +282,19 @@ async function salvarNovaReserva() {
             body: JSON.stringify(dadosReserva)
         });
 
-        const resultado = await resposta.json();
-        
         if (resposta.ok) {
-            alert(`🎉 ${resultado.mensagem || 'Reserva realizada com sucesso!'}\nTotal de ${diferencaDias} diárias: R$ ${valorTotal.toFixed(2)}`);
+            alert(`🎉 Reserva realizada!\nTotal de ${diferencaDias} diárias: R$ ${valorTotal.toFixed(2)}`);
             
             document.getElementById('dataRetirada').value = '';
             document.getElementById('dataDevolucao').value = '';
-
-            alternarTela('historico');
-            carregarReservasDoBanco();
             
-            carregarCarrosDoBanco(); 
+            
         } else {
-            alert("Erro ao finalizar locação: " + (resultado.mensagem || resultado.erro));
+            alert("Erro ao finalizar locação. Verifique o servidor.");
         }
     } catch (erro) {
-        console.error("Erro ao enviar reserva:", erro);
-        alert("Não foi possível conectar ao servidor para concluir a locação.");
+        console.error("Erro na requisição:", erro);
+        alert("Falha na comunicação com o banco de dados.");
     }
 }
 
@@ -567,5 +560,12 @@ function toggleMenuMobile() {
     const menu = document.getElementById('menu-navegacao');
     menu.classList.toggle('ativo');
 }
+
+flatpickr(".calendario-br", {
+    altInput: true,
+    altFormat: "d/m/Y", 
+    dateFormat: "Y-m-d", 
+    minDate: "today" 
+});
 
 window.onload = verificarSessaoSalva;

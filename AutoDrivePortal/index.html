@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Completo — Locadora AutoDrive</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -46,7 +48,6 @@
         <h1 style="color: #2c3e50; margin-bottom: 10px; font-size: 32px; font-weight: 800;">Bem-vindo ao AutoDrive Portal! </h1>
         <p style="color: #7f8c8d; font-size: 16px; margin-bottom: 40px;">O seu sistema inteligente de locação e gerenciamento de frota.</p>
         
-        <!-- Os botões de atalho -->
         <div class="grid-atalhos" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
             <div class="card-atalho" onclick="alternarTela('catalogo')" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); cursor: pointer; width: 250px; border: 1px solid #eef2f5; transition: all 0.3s ease;">
                 <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
@@ -61,10 +62,8 @@
             </div>
         </div>
 
-        <!-- Linha divisória charmosa -->
         <div class="home-divider"></div>
         
-        <!-- Seção Explicativa da Home Turbinada -->
         <div class="home-info-section">
             <h2>Por que usar o AutoDrive?</h2>
             <p class="home-info-subtitle">Uma experiência simples, rápida e totalmente digital para o seu dia a dia.</p>
@@ -105,23 +104,26 @@
         </section>
 
         <section id="tela-reserva" class="tela">
-            <h2>Confirmar Período da Reserva</h2>
-            <div class="form-box" style="max-width: 500px; margin: 0 auto;">
-                <h3 id="reservaCarroTitulo" style="margin-bottom: 15px; color:#3498db;"></h3>
-                <input type="hidden" id="reservaCarroId">
-                <input type="hidden" id="reservaPrecoDiaria"> 
-                <div class="form-group">
-                    <label>Data de Retirada:</label>
-                    <input type="date" id="dataRetirada">
-                </div>
-                <div class="form-group">
-                    <label>Data de Devolução:</label>
-                    <input type="date" id="dataDevolucao">
-                </div>
-                <button class="btn-acao" onclick="salvarNovaReserva()">Finalizar Locação</button>
-                <button class="btn-acao" onclick="alternarTela('catalogo')" style="background:#e74c3c; margin-top: 10px;">Cancelar</button>
-            </div>
-        </section>
+    <h2>Confirmar Período da Reserva</h2>
+    <div class="form-box" style="max-width: 500px; margin: 0 auto;">
+        <h3 id="reservaCarroTitulo" style="margin-bottom: 15px; color:#3498db;"></h3>
+        <input type="hidden" id="reservaCarroId">
+        <input type="hidden" id="reservaPrecoDiaria"> 
+        
+        <div class="form-group">
+            <label>Data de Retirada:</label>
+            <input type="text" id="dataRetirada" class="calendario-br" placeholder="Selecione a data">
+        </div>
+        
+        <div class="form-group">
+            <label>Data de Devolução:</label>
+            <input type="text" id="dataDevolucao" class="calendario-br" placeholder="Selecione a data">
+        </div>
+        
+        <button class="btn-acao" onclick="salvarNovaReserva()">Finalizar Locação</button>
+        <button class="btn-acao" onclick="alternarTela('catalogo')" style="background:#e74c3c; margin-top: 10px;">Cancelar</button>
+    </div>
+</section>
 
         <section id="tela-historico" class="tela">
             <h2>Histórico de Locações Registradas</h2>
