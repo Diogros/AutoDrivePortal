@@ -67,7 +67,8 @@ async function efetuarLogin() {
 
             carregarReservasDoBanco(); 
             carregarCarrosDoBanco(); 
-            alternarTela('catalogo');
+            
+            alternarTela('home');
 
         } else {
             alert(`Erro: ${dados.mensagem}`);
@@ -88,7 +89,6 @@ function efetuarLogout() {
     document.querySelectorAll('.tela').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('header nav button').forEach(b => b.classList.remove('active'));
     
-    document.getElementById('btn-cat').classList.add('active');
     document.getElementById('tela-login').classList.add('active');
     
     document.getElementById('loginEmail').value = '';
@@ -98,6 +98,7 @@ function efetuarLogout() {
 function alternarTela(telaNome) {
     const menu = document.getElementById('menu-navegacao');
     if (menu) menu.classList.remove('ativo');
+    
     document.querySelectorAll('.tela').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('header nav button').forEach(b => b.classList.remove('active'));
     
@@ -114,6 +115,9 @@ function alternarTela(telaNome) {
     if(telaNome === 'admin') {
         document.getElementById('btn-adm').classList.add('active');
         renderizarGerenciadorFrota();
+    }
+    if(telaNome === 'home') {
+        document.getElementById('btn-home').classList.add('active');
     }
 }
 
@@ -547,7 +551,8 @@ function verificarSessaoSalva() {
 
             carregarReservasDoBanco(); 
             carregarCarrosDoBanco(); 
-            alternarTela('catalogo');
+            
+            alternarTela('home');
             
         } catch (erro) {
             console.error("Erro ao restaurar sessão:", erro);

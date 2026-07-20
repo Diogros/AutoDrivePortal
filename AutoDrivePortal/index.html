@@ -9,21 +9,23 @@
 </head>
 <body>
 
-   <header id="cabecalho-sistema" style="display: none;">
-    <div class="header-top">
-        <div class="logo">🚙 AutoDrive Portal</div>
-        <button id="btn-menu-mobile" onclick="toggleMenuMobile()">☰</button>
-    </div>
-    <nav id="menu-navegacao">
-        <span id="nomeUsuarioLogado" class="user-info"></span>
-        <button id="btn-cat" class="active" onclick="alternarTela('catalogo')">🛒 Catálogo</button>
-        <button id="btn-his" onclick="alternarTela('historico')">📋 Minhas Reservas</button>
-        <button id="btn-adm" onclick="alternarTela('admin')" style="border: 1px dashed #3498db; display: none;">⚙️ Painel Admin</button>
-        <button onclick="efetuarLogout()" style="background: #e74c3c; padding: 5px 10px;">Sair</button>
-    </nav>
-</header>
+    <header id="cabecalho-sistema" style="display: none;">
+        <div class="header-top">
+            <div class="logo">🚙 AutoDrive Portal</div>
+            <button id="btn-menu-mobile" onclick="toggleMenuMobile()">☰</button>
+        </div>
+        <nav id="menu-navegacao">
+            <span id="nomeUsuarioLogado" class="user-info"></span>
+            <button id="btn-home" class="active" onclick="alternarTela('home')">🏠 Home</button>
+            <button id="btn-cat" onclick="alternarTela('catalogo')">🛒 Catálogo</button>
+            <button id="btn-his" onclick="alternarTela('historico')">📋 Minhas Reservas</button>
+            <button id="btn-adm" onclick="alternarTela('admin')" style="border: 1px dashed #3498db; display: none;">⚙️ Painel Admin</button>
+            <button onclick="efetuarLogout()" style="background: #e74c3c; padding: 5px 10px; color: white; border: none; border-radius: 4px; cursor: pointer;">Sair</button>
+        </nav>
+    </header>
 
     <main class="container">
+        
         <section id="tela-login" class="tela active">
             <h2>Acesso ao Sistema — Sistema de Locadora</h2>
             <div class="form-box" style="max-width: 500px; margin: 0 auto;">
@@ -38,6 +40,64 @@
                 <button class="btn-acao" onclick="efetuarLogin()">Entrar no Sistema</button>
             </div>
         </section>
+
+        <section id="tela-home" class="tela">
+    <div class="home-container" style="text-align: center; padding: 40px 20px;">
+        <h1 style="color: #2c3e50; margin-bottom: 10px; font-size: 32px; font-weight: 800;">Bem-vindo ao AutoDrive Portal! 🚙</h1>
+        <p style="color: #7f8c8d; font-size: 16px; margin-bottom: 40px;">O seu sistema inteligente de locação e gerenciamento de frota.</p>
+        
+        <!-- Os botões de atalho -->
+        <div class="grid-atalhos" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <div class="card-atalho" onclick="alternarTela('catalogo')" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); cursor: pointer; width: 250px; border: 1px solid #eef2f5; transition: all 0.3s ease;">
+                <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
+                <h3 style="margin: 10px 0; color: #2c3e50; font-size: 18px;">Conhecer Frota</h3>
+                <p style="font-size: 13px; color: #777; line-height: 1.4;">Explore os veículos disponíveis e faça sua reserva instantaneamente.</p>
+            </div>
+            
+            <div class="card-atalho" onclick="alternarTela('historico')" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); cursor: pointer; width: 250px; border: 1px solid #eef2f5; transition: all 0.3s ease;">
+                <span style="font-size: 40px; display: block; margin-bottom: 10px;">📋</span>
+                <h3 style="margin: 10px 0; color: #2c3e50; font-size: 18px;">Minhas Reservas</h3>
+                <p style="font-size: 13px; color: #777; line-height: 1.4;">Consulte o histórico, valores e o status das suas locações.</p>
+            </div>
+        </div>
+
+        <!-- Linha divisória charmosa -->
+        <div class="home-divider"></div>
+        
+        <!-- Seção Explicativa da Home Turbinada -->
+        <div class="home-info-section">
+            <h2>Por que usar o AutoDrive?</h2>
+            <p class="home-info-subtitle">Uma experiência simples, rápida e totalmente digital para o seu dia a dia.</p>
+            
+            <div class="home-features-grid">
+                <div class="feature-card card-blue">
+                    <div class="icon-circle">
+                        <span class="feature-icon">🚗</span>
+                    </div>
+                    <h3>Catálogo em Tempo Real</h3>
+                    <p>Nossa frota é integrada direto com o banco de dados. Se o carro foi alugado ou está em manutenção, você fica sabendo na hora!</p>
+                </div>
+                
+                <div class="feature-card card-green">
+                    <div class="icon-circle">
+                        <span class="feature-icon">📅</span>
+                    </div>
+                    <h3>Reservas Inteligentes</h3>
+                    <p>O sistema calcula o valor total das diárias automaticamente. Bloqueia datas retroativas e evita erros operacionais de agendamento.</p>
+                </div>
+                
+                <div class="feature-card card-orange">
+                    <div class="icon-circle">
+                        <span class="feature-icon">⚙️</span>
+                    </div>
+                    <h3>Painel Administrativo</h3>
+                    <p>Ferramentas exclusivas para gerentes controlarem a entrada de novos veículos, exclusão de frota antiga e auditoria de status.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
         <section id="tela-catalogo" class="tela">
             <h2>Nossa Frota de Veículos</h2>
