@@ -96,6 +96,8 @@ function efetuarLogout() {
 }
 
 function alternarTela(telaNome) {
+    const menu = document.getElementById('menu-navegacao');
+    if (menu) menu.classList.remove('ativo');
     document.querySelectorAll('.tela').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('header nav button').forEach(b => b.classList.remove('active'));
     
@@ -554,6 +556,11 @@ function verificarSessaoSalva() {
     } else {
         carregarCarrosDoBanco();
     }
+}
+
+function toggleMenuMobile() {
+    const menu = document.getElementById('menu-navegacao');
+    menu.classList.toggle('ativo');
 }
 
 window.onload = verificarSessaoSalva;

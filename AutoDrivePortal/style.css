@@ -290,3 +290,55 @@ th {
         font-size: 12px !important;
         margin: 2px 0 !important;
     }
+
+#btn-menu-mobile {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #fff; 
+    padding: 5px;
+}
+
+#menu-navegacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    #cabecalho-sistema {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    #btn-menu-mobile {
+        display: block;
+    }
+
+    #menu-navegacao {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    #menu-navegacao.ativo {
+        display: flex;
+    }
+
+    #menu-navegacao button, 
+    #menu-navegacao span {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+        box-sizing: border-box;
+    }
+}

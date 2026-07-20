@@ -9,16 +9,19 @@
 </head>
 <body>
 
-    <header id="cabecalho-sistema" style="display: none;">
+   <header id="cabecalho-sistema" style="display: none;">
+    <div class="header-top">
         <div class="logo">🚙 AutoDrive Portal</div>
-        <nav style="display: flex; align-items: center;">
-            <span id="nomeUsuarioLogado" class="user-info"></span>
-            <button id="btn-cat" class="active" onclick="alternarTela('catalogo')">🛒 Catálogo</button>
-            <button id="btn-his" onclick="alternarTela('historico')">📋 Minhas Reservas</button>
-            <button id="btn-adm" onclick="alternarTela('admin')" style="border: 1px dashed #3498db; display: none;">⚙️ Painel Admin</button>
-            <button onclick="efetuarLogout()" style="background: #e74c3c; padding: 5px 10px;">Sair</button>
-        </nav>
-    </header>
+        <button id="btn-menu-mobile" onclick="toggleMenuMobile()">☰</button>
+    </div>
+    <nav id="menu-navegacao">
+        <span id="nomeUsuarioLogado" class="user-info"></span>
+        <button id="btn-cat" class="active" onclick="alternarTela('catalogo')">🛒 Catálogo</button>
+        <button id="btn-his" onclick="alternarTela('historico')">📋 Minhas Reservas</button>
+        <button id="btn-adm" onclick="alternarTela('admin')" style="border: 1px dashed #3498db; display: none;">⚙️ Painel Admin</button>
+        <button onclick="efetuarLogout()" style="background: #e74c3c; padding: 5px 10px;">Sair</button>
+    </nav>
+</header>
 
     <main class="container">
         <section id="tela-login" class="tela active">
@@ -26,18 +29,13 @@
             <div class="form-box" style="max-width: 500px; margin: 0 auto;">
                 <div class="form-group">
                     <label>E-mail institucional:</label>
-                    <input type="email" id="loginEmail" placeholder="Ex: admin@locadora.com ou ana@email.com" value="admin@locadora.com" onkeydown="if(event.key === 'Enter') efetuarLogin()">
+                    <input type="email" id="loginEmail" placeholder="Digite seu e-mail" onkeydown="if(event.key === 'Enter') efetuarLogin()">
                 </div>
                 <div class="form-group">
                     <label>Senha de acesso:</label>
-                    <input type="password" id="loginSenha" placeholder="Digite sua senha" value="admin2026" onkeydown="if(event.key === 'Enter') efetuarLogin()">
+                    <input type="password" id="loginSenha" placeholder="Digite sua senha" onkeydown="if(event.key === 'Enter') efetuarLogin()">
                 </div>
                 <button class="btn-acao" onclick="efetuarLogin()">Entrar no Sistema</button>
-                <div style="margin-top: 15px; font-size: 12px; color: #777; text-align: center;">
-                    <strong>Dica para testes:</strong><br>
-                    Admin: admin@locadora.com | Senha: admin2026<br>
-                    Cliente: ana.silva@email.com | Senha: senha123
-                </div>
             </div>
         </section>
 
