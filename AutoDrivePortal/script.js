@@ -267,13 +267,24 @@ async function salvarNovaReserva() {
     const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24)) || 1;
     const valorTotal = diferencaDias * precoDiaria;
 
+    // Garante que pega o ID do usuário atualmente logado (seja cliente ou admin)
+    const usuarioAtual = USUARIO_LOGADO || JSON.parse(localStorage.getItem('usuarioLogado'));
+
+    if (!usuarioAtual || !usuarioAtual.id) {
+        alert("Erro: Nenhum usuário logado encontrado. Faça login novamente.");
+        return;
+    }
+
     const dadosReserva = {
+        usuario_id: usuarioAtual.id, // Pega dinamicamente o ID correto da sessão
         veiculo_id: parseInt(veiculoId),
         data_inicio: dataInicio, 
         data_fim: dataFim,
         valor_total: valorTotal,
         status: "Pendente"
     };
+
+    console.log("Dados enviados para o servidor:", dadosReserva);
 
     try {
         const resposta = await fetch('http://localhost:3000/reservas', {
@@ -283,11 +294,12 @@ async function salvarNovaReserva() {
         });
 
         if (resposta.ok) {
-            alert(`🎉 Reserva realizada!\nTotal de ${diferencaDias} diárias: R$ ${valorTotal.toFixed(2)}`);
+            alert(`🎉 Reserva realizada com sucesso!\nTotal de ${diferencaDias} diária(s): R$ ${valorTotal.toFixed(2)}`);
             
             document.getElementById('dataRetirada').value = '';
             document.getElementById('dataDevolucao').value = '';
             
+            window.location.reload();
             
         } else {
             alert("Erro ao finalizar locação. Verifique o servidor.");
