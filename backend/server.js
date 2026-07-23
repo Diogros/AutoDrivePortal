@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors'); 
 const dotenv = require('dotenv');
+const path = require('path');
 const veiculoController = require('./src/controllers/veiculoController');
 const reservaController = require('./src/controllers/reservaController');
 const authController = require('./src/controllers/authcontroller');
@@ -11,6 +12,8 @@ const app = express();
 
 app.use(cors()); 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'AutoDrivePortal')));
+console.log('Servindo arquivos estáticos de:', path.join(__dirname, '..', 'AutoDrivePortal'));
 
 app.get('/ping', (req, res) => {
     res.json({ 
