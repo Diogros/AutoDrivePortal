@@ -12,7 +12,7 @@ const app = express();
 
 app.use(cors()); 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..', 'AutoDrivePortal')));
+app.use(express.static(path.join(__dirname, 'AutoDrivePortal')));
 console.log('Servindo arquivos estáticos de:', path.join(__dirname, '..', 'AutoDrivePortal'));
 
 app.get('/ping', (req, res) => {
