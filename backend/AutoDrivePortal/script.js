@@ -4,7 +4,7 @@ let USUARIO_LOGADO = null;
 
 async function carregarCarrosDoBanco() {
     try {
-        const resposta = await fetch('http://localhost:3000/veiculos');
+        const resposta = await fetch('/veiculos');
         const dados = await resposta.json();
         
         if (Array.isArray(dados)) {
@@ -38,7 +38,7 @@ async function efetuarLogin() {
     }
 
     try {
-        const resposta = await fetch('http://localhost:3000/login', {
+        const resposta = await fetch('/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, senha })
@@ -203,7 +203,7 @@ async function alterarStatusCarro(idCarro, novoStatus) {
     const carroAtualizado = { ...carro, status: novoStatus };
 
     try {
-        const resposta = await fetch(`http://localhost:3000/veiculos/${idCarro}`, {
+        const resposta = await fetch(`/veiculos/${idCarro}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(carroAtualizado)
@@ -287,7 +287,7 @@ async function salvarNovaReserva() {
     console.log("Dados enviados para o servidor:", dadosReserva);
 
     try {
-        const resposta = await fetch('http://localhost:3000/reservas', {
+        const resposta = await fetch('/reservas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosReserva)
@@ -312,7 +312,7 @@ async function salvarNovaReserva() {
 
 async function carregarReservasDoBanco() {
     try {
-        const resposta = await fetch('http://localhost:3000/reservas');
+        const resposta = await fetch('/reservas');
         if (!resposta.ok) throw new Error("Erro na resposta do servidor");
 
         const reservas = await resposta.json();
@@ -429,7 +429,7 @@ async function alterarStatusReserva(id, novoStatus) {
     }
 
     try {
-        const resposta = await fetch(`http://localhost:3000/reservas/${id}/status`, {
+        const resposta = await fetch(`/reservas/${id}/status`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: novoStatus })
@@ -480,7 +480,7 @@ async function cadastrarCarroAdmin() {
     };
 
     try {
-        const resposta = await fetch('http://localhost:3000/veiculos', {
+        const resposta = await fetch('/veiculos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(novoVeiculo)
@@ -518,7 +518,7 @@ async function deletarCarro(idCarro, statusCarro) {
     if (!confirmacao) return; 
 
     try {
-        const resposta = await fetch(`http://localhost:3000/veiculos/${idCarro}`, {
+        const resposta = await fetch(`/veiculos/${idCarro}`, {
             method: 'DELETE'
         });
 
